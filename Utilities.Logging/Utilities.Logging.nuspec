@@ -6,7 +6,7 @@
     <title>$title$</title>
     <authors>Alexander Illarionov</authors>
     <projectUrl>http://github.com/AlexanderPro/Utilities</projectUrl>
-    <description>This library allows to log the data to different destinations.</description>
+    <description>This .net library allows to log the data to different destinations.</description>
     <copyright>Copyright 2014</copyright>
   </metadata>
 </package>
