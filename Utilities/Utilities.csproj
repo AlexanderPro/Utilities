@@ -81,7 +81,9 @@
     <Compile Include="Security\Principal\WindowsImpersonator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Utilities.nuspec" />
+    <None Include="Utilities.nuspec">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
