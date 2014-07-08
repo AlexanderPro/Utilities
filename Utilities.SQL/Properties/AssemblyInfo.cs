@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Utilities.SQL")]
 [assembly: AssemblyDescription("This .net library contains classes for working with data and SQL.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Alexander Illarionov")]
 [assembly: AssemblyProduct("Utilities.SQL")]
 [assembly: AssemblyCopyright("Copyright © 2014")]
 [assembly: AssemblyTrademark("")]
