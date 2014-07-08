@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Utilities.SQL")]
-[assembly: AssemblyDescription("This .net library contains classes for working with data and SQL.")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Alexander Illarionov")]
 [assembly: AssemblyProduct("Utilities.SQL")]
