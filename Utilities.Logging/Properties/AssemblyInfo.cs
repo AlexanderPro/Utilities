@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Utilities.Logging")]
-[assembly: AssemblyDescription("This library allows to log the data to different destinations.")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Alexander Illarionov")]
 [assembly: AssemblyProduct("Utilities.Logging")]
