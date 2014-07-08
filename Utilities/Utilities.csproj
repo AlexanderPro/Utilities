@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{85644733-CA10-4EF1-946E-514D9A59AB6A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Utilities</RootNamespace>
+    <AssemblyName>Utilities</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.JScript" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\EventArgs.cs" />
+    <Compile Include="Common\ExtensionMethods\ByteArrayExtensions.cs" />
+    <Compile Include="Common\ExtensionMethods\EnumExtensions.cs" />
+    <Compile Include="Common\ExtensionMethods\TypeConversionExtensions.cs" />
+    <Compile Include="Diagnostics\ProcessManager.cs" />
+    <Compile Include="Diagnostics\ProcessNativeConstants.cs" />
+    <Compile Include="Diagnostics\ProcessNativeMethods.cs" />
+    <Compile Include="Diagnostics\ProcessNativeTypes.cs" />
+    <Compile Include="Diagnostics\WindowsServiceManager.cs" />
+    <Compile Include="Diagnostics\WindowsServiceNativeConstants.cs" />
+    <Compile Include="Diagnostics\WindowsServiceNativeMethods.cs" />
+    <Compile Include="Diagnostics\WindowsServiceNativeTypes.cs" />
+    <Compile Include="IO\ExtensionMethods\IOExtensions.cs" />
+    <Compile Include="JScript\JScriptEvaluator.cs" />
+    <Compile Include="Net\Email\SMTP\EmailSender.cs" />
+    <Compile Include="Net\RAS\RasDialer.cs" />
+    <Compile Include="Net\RAS\RasException.cs" />
+    <Compile Include="Net\RAS\RasNativeMethods.cs" />
+    <Compile Include="Net\RAS\RasNativeTypes.cs" />
+    <Compile Include="Net\Sockets\SocketBase.cs" />
+    <Compile Include="Net\Sockets\SocketClient.cs" />
+    <Compile Include="Net\Sockets\SocketClientBase.cs" />
+    <Compile Include="Net\Sockets\SocketClientSsl.cs" />
+    <Compile Include="Net\Sockets\SocketDatagramClient.cs" />
+    <Compile Include="Net\Sockets\SocketDatagramServer.cs" />
+    <Compile Include="Net\Sockets\SocketEventArgs.cs" />
+    <Compile Include="Net\Sockets\SocketServer.cs" />
+    <Compile Include="Net\Sockets\SocketServerAsync.cs" />
+    <Compile Include="Net\Sockets\SocketServerBase.cs" />
+    <Compile Include="Net\Sockets\SocketServerSslAsync.cs" />
+    <Compile Include="Net\Sockets\SocketServerStatus.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\Cryptography\SymmetricAlgorithmExtensions.cs" />
+    <Compile Include="Security\Cryptography\X509Certificates\Crypto.cs" />
+    <Compile Include="Security\Cryptography\X509Certificates\RSAParameterTraits.cs" />
+    <Compile Include="Security\Principal\WindowsImpersonator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Utilities.nuspec" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
