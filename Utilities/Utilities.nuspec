@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>$id$</id>
+    <id>Pro.NET.Utilities</id>
     <version>$version$</version>
-    <title>$title$</title>
+    <title>.NET Utilities</title>
     <authors>Alexander Illarionov</authors>
     <projectUrl>http://github.com/AlexanderPro/Utilities</projectUrl>
     <description>This .net library contains many useful methods, extensions, helper classes, etc.</description>
