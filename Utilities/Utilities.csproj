@@ -79,6 +79,7 @@
     <Compile Include="Security\Cryptography\X509Certificates\Crypto.cs" />
     <Compile Include="Security\Cryptography\X509Certificates\RSAParameterTraits.cs" />
     <Compile Include="Security\Principal\WindowsImpersonator.cs" />
+    <Compile Include="SQL\SQLHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Utilities.nuspec">
