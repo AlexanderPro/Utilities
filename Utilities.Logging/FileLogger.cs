@@ -75,7 +75,7 @@ namespace Utilities.Logging
             if (fileName.StartsWith("~"))
             {
                 String executablePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                fileName = (System.Web.HttpContext.Current != null) ? System.Web.HttpContext.Current.Server.MapPath(fileName) : (executablePath + fileName.Remove(0, 1));
+                fileName = (HttpContext.GetCurrentHttpContext() != null) ? HttpContext.MapPath(fileName) : (executablePath + fileName.Remove(0, 1));
             }
             return fileName;
         }

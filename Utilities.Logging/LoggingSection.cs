@@ -6,7 +6,7 @@ using System.Xml;
 using System.Net.Mail;
 using Utilities.Logging;
 
-namespace Utilities.Configuration.Logging
+namespace Utilities.Logging
 {
     public class LoggingSection : IConfigurationSectionHandler
     {
