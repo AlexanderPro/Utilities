@@ -4,10 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.Common;
-using System.Data.SqlClient;
-using System.Data.OracleClient;
-using System.Data.OleDb;
-using System.Data.Odbc;
 
 namespace Utilities.SQL
 {
@@ -16,6 +12,17 @@ namespace Utilities.SQL
         #region Fields.Private
 
         private DbProviderFactory _factory;
+
+        #endregion
+
+
+        #region Fields.Public
+
+        public const String SqlClientProviderInvariantName = "System.Data.SqlClient";
+        public const String OracleClientProviderInvariantName = "System.Data.OracleClient";
+        public const String OracleDataAccessProviderInvariantName = "Oracle.DataAccess.Client";
+        public const String OleDbProviderInvariantName = "System.Data.OleDb";
+        public const String OdbcProviderInvariantName = "System.Data.Odbc";
 
         #endregion
 
@@ -35,54 +42,8 @@ namespace Utilities.SQL
 
         #region Constructors
 
-        public SQLHelper(String connectionString, Provider provider)
-            : this(connectionString, provider, true)
+        public SQLHelper(String connectionString, String providerInvariantName) : this(connectionString, providerInvariantName, true)
         {
-
-        }
-
-        public SQLHelper(String connectionString, String providerInvariantName)
-            : this(connectionString, providerInvariantName, true)
-        {
-
-        }
-
-        public SQLHelper(String connectionString, Provider provider, Boolean handleExceptions)
-        {
-            switch (provider)
-            {
-                case Provider.SqlServer:
-                    {
-                        _factory = SqlClientFactory.Instance;
-                    }
-                    break;
-
-                case Provider.Oracle:
-                    {
-#pragma warning disable 0618
-                        _factory = OracleClientFactory.Instance;
-#pragma warning restore 0618
-                    }
-                    break;
-
-                case Provider.OleDb:
-                    {
-                        _factory = OleDbFactory.Instance;
-                    }
-                    break;
-
-                case Provider.ODBC:
-                    {
-                        _factory = OdbcFactory.Instance;
-                    }
-                    break;
-            }
-
-            Connection = _factory.CreateConnection();
-            Command = _factory.CreateCommand();
-            Connection.ConnectionString = connectionString;
-            Command.Connection = Connection;
-            HandleExceptions = handleExceptions;
         }
 
         public SQLHelper(String connectionString, String providerInvariantName, Boolean handleExceptions)
@@ -518,14 +479,6 @@ namespace Utilities.SQL
         }
 
         #endregion
-    }
-
-    public enum Provider
-    {
-        SqlServer = 0x01,
-        Oracle = 0x02,
-        OleDb = 0x03,
-        ODBC = 0x04
     }
 
     public enum ConnectionMode
