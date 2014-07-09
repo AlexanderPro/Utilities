@@ -7,7 +7,7 @@ using System.Text;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace Utilities.Logging
+namespace Utilities.Reflection
 {
     /// <summary>
     /// Provides access to System.Web.HttpContext.Current properties.
