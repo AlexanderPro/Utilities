@@ -48,12 +48,8 @@ namespace Utilities.Common.ExtensionMethods
             if (value == null || value.Length == 0) return String.Empty;
             if (delimiter == null) throw new ArgumentNullException("delimiter");
 
-            var sb = new StringBuilder(value.Length);
-            foreach (Byte b in value)
-            {
-                sb.AppendFormat("{0:X2}{1}", b, delimiter);
-            }
-            return sb.ToString().TrimEnd(delimiter.ToCharArray());
+            var result = String.Join(delimiter, value.Select(x => x.ToString("X2")));
+            return result;
         }
 
         /// <summary>
