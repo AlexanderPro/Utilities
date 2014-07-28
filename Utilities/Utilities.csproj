@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Common\EventArgs.cs" />
     <Compile Include="Common\ExtensionMethods\ByteArrayExtensions.cs" />
+    <Compile Include="Common\ExtensionMethods\DictionaryExtensions.cs" />
     <Compile Include="Common\ExtensionMethods\EnumExtensions.cs" />
     <Compile Include="Common\ExtensionMethods\TypeConversionExtensions.cs" />
     <Compile Include="Configuration\Logging\LoggingSection.cs" />
