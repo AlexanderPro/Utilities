@@ -7,7 +7,7 @@ namespace Utilities.Common.ExtensionMethods
 {
     public static class DictionaryExtensions
     {
-        public static String ToKeyValueString<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, String keyValueDelimiter = "=", String pairDelimiter = ";", Func<String, String> normalizeKeyFunc = null, Func<String, String> normalizeValueFunc = null)
+        public static String ToKeyValueString<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, String pairDelimiter = ";", String keyValueDelimiter = "=", Func<String, String> normalizeKeyFunc = null, Func<String, String> normalizeValueFunc = null)
         {
             var pairs = dictionary.
                         Select(kv => 
@@ -19,7 +19,7 @@ namespace Utilities.Common.ExtensionMethods
             return result;
         }
 
-        public static IDictionary<String, String> ToDictionary(this String value, String keyValueDelimiter = "=", String pairDelimiter = ";", Func<String, String> normalizeKeyFunc = null, Func<String, String> normalizeValueFunc = null)
+        public static IDictionary<String, String> ToDictionary(this String value, String pairDelimiter = ";", String keyValueDelimiter = "=", Func<String, String> normalizeKeyFunc = null, Func<String, String> normalizeValueFunc = null)
         {
             var dictionary = new Dictionary<String, String>();
             if (String.IsNullOrEmpty(value)) return dictionary;
