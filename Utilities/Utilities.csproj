@@ -61,6 +61,7 @@
     <Compile Include="Diagnostics\WindowsServiceNativeMethods.cs" />
     <Compile Include="Diagnostics\WindowsServiceNativeTypes.cs" />
     <Compile Include="IO\ExtensionMethods\IOExtensions.cs" />
+    <Compile Include="IO\LineReader.cs" />
     <Compile Include="JScript\JScriptEvaluator.cs" />
     <Compile Include="Logging\ConsoleExceptionLoggerEntry.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
