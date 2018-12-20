@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_40</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.JScript" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
@@ -46,10 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\EventArgs.cs" />
-    <Compile Include="Common\ExtensionMethods\ByteArrayExtensions.cs" />
-    <Compile Include="Common\ExtensionMethods\DictionaryExtensions.cs" />
-    <Compile Include="Common\ExtensionMethods\EnumExtensions.cs" />
-    <Compile Include="Common\ExtensionMethods\TypeConversionExtensions.cs" />
+    <Compile Include="Extensions\ByteArrayExtensions.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\TypeConversionExtensions.cs" />
     <Compile Include="Configuration\Logging\LoggingSection.cs" />
     <Compile Include="Configuration\UtilitiesSectionGroup.cs" />
     <Compile Include="Diagnostics\ProcessManager.cs" />
@@ -60,9 +61,9 @@
     <Compile Include="Diagnostics\WindowsServiceNativeConstants.cs" />
     <Compile Include="Diagnostics\WindowsServiceNativeMethods.cs" />
     <Compile Include="Diagnostics\WindowsServiceNativeTypes.cs" />
-    <Compile Include="IO\ExtensionMethods\IOExtensions.cs" />
+    <Compile Include="IO\DirectoryHelper.cs" />
+    <Compile Include="IO\FileHelper.cs" />
     <Compile Include="IO\LineReader.cs" />
-    <Compile Include="JScript\JScriptEvaluator.cs" />
     <Compile Include="Logging\ConsoleExceptionLoggerEntry.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\ConsoleLoggerEntry.cs" />
@@ -95,7 +96,6 @@
     <Compile Include="Net\Sockets\SocketServerSslAsync.cs" />
     <Compile Include="Net\Sockets\SocketServerStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reflection\HttpContext.cs" />
     <Compile Include="Security\Cryptography\SymmetricAlgorithmExtensions.cs" />
     <Compile Include="Security\Cryptography\X509Certificates\Crypto.cs" />
     <Compile Include="Security\Cryptography\X509Certificates\RSAParameterTraits.cs" />
