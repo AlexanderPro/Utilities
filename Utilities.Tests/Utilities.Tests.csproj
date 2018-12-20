@@ -50,7 +50,6 @@
     <Compile Include="Common\TrafficLight.cs" />
     <Compile Include="Common\TypeConversionExtensionsTests.cs" />
     <Compile Include="IO\LineReaderTests.cs" />
-    <Compile Include="JScript\JScriptEvaluatorTests.cs" />
     <Compile Include="Net\SocketTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ByteArrayExtensionsTests.cs" />
