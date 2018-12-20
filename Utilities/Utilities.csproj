@@ -51,8 +51,6 @@
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\TypeConversionExtensions.cs" />
-    <Compile Include="Configuration\Logging\LoggingSection.cs" />
-    <Compile Include="Configuration\UtilitiesSectionGroup.cs" />
     <Compile Include="Diagnostics\ProcessManager.cs" />
     <Compile Include="Diagnostics\ProcessNativeConstants.cs" />
     <Compile Include="Diagnostics\ProcessNativeMethods.cs" />
@@ -64,20 +62,6 @@
     <Compile Include="IO\DirectoryHelper.cs" />
     <Compile Include="IO\FileHelper.cs" />
     <Compile Include="IO\LineReader.cs" />
-    <Compile Include="Logging\ConsoleExceptionLoggerEntry.cs" />
-    <Compile Include="Logging\ConsoleLogger.cs" />
-    <Compile Include="Logging\ConsoleLoggerEntry.cs" />
-    <Compile Include="Logging\EventLogLogger.cs" />
-    <Compile Include="Logging\EventLogLoggerEntry.cs" />
-    <Compile Include="Logging\ExceptionLoggerEntry.cs" />
-    <Compile Include="Logging\FileLogger.cs" />
-    <Compile Include="Logging\ILogger.cs" />
-    <Compile Include="Logging\ILoggerEntry.cs" />
-    <Compile Include="Logging\Log.cs" />
-    <Compile Include="Logging\Logger.cs" />
-    <Compile Include="Logging\LoggerEntry.cs" />
-    <Compile Include="Logging\MailLogger.cs" />
-    <Compile Include="Logging\SimpleLoggerEntry.cs" />
     <Compile Include="Net\Email\SMTP\EmailSender.cs" />
     <Compile Include="Net\RAS\RasDialer.cs" />
     <Compile Include="Net\RAS\RasException.cs" />
@@ -96,6 +80,7 @@
     <Compile Include="Net\Sockets\SocketServerSslAsync.cs" />
     <Compile Include="Net\Sockets\SocketServerStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reflection\HttpContext.cs" />
     <Compile Include="Security\Cryptography\SymmetricAlgorithmExtensions.cs" />
     <Compile Include="Security\Cryptography\X509Certificates\Crypto.cs" />
     <Compile Include="Security\Cryptography\X509Certificates\RSAParameterTraits.cs" />
