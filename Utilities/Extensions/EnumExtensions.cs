@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Utilities.Extensions
 {
+    /// <summary>
+    /// Extension methods for Enum.
+    /// </summary>
     public static class EnumExtensions
     {
         /// <summary>
@@ -61,7 +64,7 @@ namespace Utilities.Extensions
         /// <typeparam name="TAttribute">Type of the attribute</typeparam>
         /// <param name="value">The instance of the <see cref="Enum"/> structure.</param>
         /// <returns>Returns the attribute object if found. Returns null if not found.</returns>
-        private static TAttribute GetSingleAttributeOrNull<TAttribute>(this Enum value) where TAttribute : Attribute
+        internal static TAttribute GetSingleAttributeOrNull<TAttribute>(this Enum value) where TAttribute : Attribute
         {
             var attribute = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(TAttribute), false).SingleOrDefault() as TAttribute;
             return attribute;
