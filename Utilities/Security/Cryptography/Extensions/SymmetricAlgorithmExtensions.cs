@@ -5,8 +5,11 @@ using System.Text;
 using System.IO;
 using System.Security.Cryptography;
 
-namespace Utilities.Security.Cryptography
+namespace Utilities.Security.Cryptography.Extensions
 {
+    /// <summary>
+    /// Extension methods for SymmetricAlgorithm.
+    /// </summary>
     public static class SymmetricAlgorithmExtensions
     {
         /// <summary>

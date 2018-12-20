@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Utilities.Security.Cryptography;
+using Utilities.Security.Cryptography.Extensions;
 
 namespace Utilities.Tests.Security.Cryptography
 {
