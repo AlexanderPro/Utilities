@@ -80,7 +80,6 @@
     <Compile Include="Net\Sockets\SocketServerSslAsync.cs" />
     <Compile Include="Net\Sockets\SocketServerStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reflection\HttpContext.cs" />
     <Compile Include="Security\Cryptography\SymmetricAlgorithmExtensions.cs" />
     <Compile Include="Security\Cryptography\X509Certificates\Crypto.cs" />
     <Compile Include="Security\Cryptography\X509Certificates\RSAParameterTraits.cs" />
