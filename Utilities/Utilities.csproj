@@ -50,6 +50,7 @@
     <Compile Include="Extensions\ByteArrayExtensions.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Extensions\TypeConversionExtensions.cs" />
     <Compile Include="Diagnostics\ProcessManager.cs" />
     <Compile Include="Diagnostics\ProcessNativeConstants.cs" />
