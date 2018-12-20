@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.IO;
 using System.Diagnostics;
-using Utilities.Common.ExtensionMethods;
+using Utilities.Extensions;
 
 namespace Utilities.Security.Cryptography.X509Certificates
 {

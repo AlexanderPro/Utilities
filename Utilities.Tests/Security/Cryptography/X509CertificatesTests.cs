@@ -6,7 +6,7 @@ using System.Reflection;
 using System.IO;
 using System.Security.Cryptography;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Utilities.Common.ExtensionMethods;
+using Utilities.Extensions;
 using Utilities.Security.Cryptography.X509Certificates;
 
 namespace Utilities.Tests.Security.Cryptography

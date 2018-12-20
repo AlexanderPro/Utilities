@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Utilities.Common.ExtensionMethods;
+using Utilities.Extensions;
 
 namespace Utilities.Tests.Common
 {

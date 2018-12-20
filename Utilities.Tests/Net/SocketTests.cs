@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Utilities.Common.ExtensionMethods;
+using Utilities.Extensions;
 using Utilities.Net.Sockets;
 
 namespace Utilities.Tests.Net
