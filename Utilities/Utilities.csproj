@@ -64,6 +64,7 @@
     <Compile Include="Diagnostics\WindowsServiceNativeConstants.cs" />
     <Compile Include="Diagnostics\WindowsServiceNativeMethods.cs" />
     <Compile Include="Diagnostics\WindowsServiceNativeTypes.cs" />
+    <Compile Include="Extensions\XmlExtensions.cs" />
     <Compile Include="IO\DirectoryHelper.cs" />
     <Compile Include="IO\FileHelper.cs" />
     <Compile Include="IO\LineReader.cs" />
