@@ -8,7 +8,7 @@ using Utilities.Extensions;
 namespace Utilities.Tests.Common
 {
     [TestClass]
-    public class TypeConversionExtensionsTests
+    public class ObjectExtensionsTests
     {
         [TestMethod]
         public void TestObjectIsNull()
@@ -67,11 +67,11 @@ namespace Utilities.Tests.Common
             Object obj4 = new List<String>();
             Object obj5 = DBNull.Value;
 
-            Assert.IsFalse(obj1.IsNotNullOrDBNull());
-            Assert.IsFalse(obj2.IsNotNullOrDBNull());
-            Assert.IsFalse(obj3.IsNotNullOrDBNull());
-            Assert.IsTrue(obj4.IsNotNullOrDBNull());
-            Assert.IsFalse(obj5.IsNotNullOrDBNull());
+            Assert.IsFalse(obj1.IsNotNullOrNotDBNull());
+            Assert.IsFalse(obj2.IsNotNullOrNotDBNull());
+            Assert.IsFalse(obj3.IsNotNullOrNotDBNull());
+            Assert.IsTrue(obj4.IsNotNullOrNotDBNull());
+            Assert.IsFalse(obj5.IsNotNullOrNotDBNull());
         }
 
         [TestMethod]

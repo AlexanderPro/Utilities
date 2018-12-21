@@ -1,14 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
 
 namespace Utilities.Extensions
 {
-    public static class TypeConversionExtensions
+    /// <summary>
+    /// Extension methods for <see cref="Object"/> class.
+    /// </summary>
+    public static class ObjectExtensions
     {
-        #region IsNotNull
+        /// <summary>
+        /// Determines if the object is null
+        /// </summary>
+        /// <param name="Object">The object to check</param>
+        /// <returns>True if it is null, false otherwise</returns>
+        public static Boolean IsNull(this Object value)
+        {
+            return value == null;
+        }
 
         /// <summary>
         /// Determines if the object is not null
@@ -20,38 +28,6 @@ namespace Utilities.Extensions
             return value != null;
         }
 
-        #endregion
-
-        #region IsNull
-
-        /// <summary>
-        /// Determines if the object is null
-        /// </summary>
-        /// <param name="Object">The object to check</param>
-        /// <returns>True if it is null, false otherwise</returns>
-        public static Boolean IsNull(this Object value)
-        {
-            return value == null;
-        }
-
-        #endregion
-
-        #region IsNotNullOrDBNull
-
-        /// <summary>
-        /// Determines if the object is not null or DBNull
-        /// </summary>
-        /// <param name="Object">The object to check</param>
-        /// <returns>False if it is null/DBNull, true otherwise</returns>
-        public static Boolean IsNotNullOrDBNull(this Object value)
-        {
-            return value != null && !Convert.IsDBNull(value);
-        }
-
-        #endregion
-
-        #region IsNullOrDBNull
-
         /// <summary>
         /// Determines if the object is null or DBNull
         /// </summary>
@@ -62,9 +38,15 @@ namespace Utilities.Extensions
             return value == null || Convert.IsDBNull(value);
         }
 
-        #endregion
-
-        #region ConvertTo
+        /// <summary>
+        /// Determines if the object is not null or DBNull
+        /// </summary>
+        /// <param name="Object">The object to check</param>
+        /// <returns>False if it is null/DBNull, true otherwise</returns>
+        public static Boolean IsNotNullOrNotDBNull(this Object value)
+        {
+            return value != null && !Convert.IsDBNull(value);
+        }
 
         /// <summary>
         /// Attempts to convert the object to another type and returns the value
@@ -94,7 +76,7 @@ namespace Utilities.Extensions
         /// <param name="value">Object to convert</param>
         /// <param name="defaultValue">Default value to return if there is an issue or it can't be converted</param>
         /// <returns>The object converted to the other type or the default value if there is an error or can't be converted</returns>
-        public static Object ConvertTo<T>(this T value, Type resultType, Object defaultValue = null)
+        internal static Object ConvertTo<T>(this T value, Type resultType, Object defaultValue = null)
         {
             try
             {
@@ -166,7 +148,5 @@ namespace Utilities.Extensions
                 return new T?((T)value);
             }
         }
-
-        #endregion
     }
 }
