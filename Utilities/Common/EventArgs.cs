@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Utilities.Common
 {
-#if NETFX_40
     [Serializable]
     public class EventArgs<T> : EventArgs
     {
@@ -16,5 +12,4 @@ namespace Utilities.Common
             Entity = entity;
         }
     }
-#endif
 }

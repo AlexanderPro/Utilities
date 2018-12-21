@@ -161,7 +161,7 @@ namespace Utilities.Extensions
         /// <param name="value">String value to convert</param>
         /// <param name="ignoreCase">Ignore case</param>
         /// <returns>Returns enum object</returns>
-        public static T ToEnum<T>(this string value, bool ignoreCase = false) where T : struct
+        public static T ToEnum<T>(this string value, bool ignoreCase = true) where T : struct
         {
             if (value == null)
             {

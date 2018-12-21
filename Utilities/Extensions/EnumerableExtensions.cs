@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Utilities.Extensions
 {
@@ -36,7 +35,7 @@ namespace Utilities.Extensions
         /// </summary>
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> source)
         {
-            return source == null || source.Any() == false;
+            return source == null || !source.Any();
         }
 
         /// <summary>
@@ -44,7 +43,7 @@ namespace Utilities.Extensions
         /// </summary>
         public static bool IsNotNullAndIsNotEmpty(this IEnumerable source)
         {
-            return IsNullOrEmpty(source) == false;
+            return !IsNullOrEmpty(source);
         }
 
         /// <summary>
@@ -52,7 +51,7 @@ namespace Utilities.Extensions
         /// </summary>
         public static bool IsNotNullAndIsNotEmpty<T>(this IEnumerable<T> source)
         {
-            return IsNullOrEmpty(source) == false;
+            return !IsNullOrEmpty(source);
         }
 
         /// <summary>

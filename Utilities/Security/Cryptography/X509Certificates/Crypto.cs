@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.IO;
-using System.Diagnostics;
 using Utilities.Extensions;
 
 namespace Utilities.Security.Cryptography.X509Certificates
