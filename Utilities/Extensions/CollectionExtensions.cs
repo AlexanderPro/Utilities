@@ -66,5 +66,13 @@ namespace Utilities.Extensions
             source.Add(item);
             return true;
         }
+
+        /// <summary>
+        /// Splits collection to parts and operates all items in parallel.
+        /// </summary>
+        public static void ProcessParallel<T>(this ICollection<T> source, int threadCount, Action<IList<T>> action)
+        { 
+            source.SplitToParts(threadCount).AsParallel().ForAll(action);
+        }
     }
 }
