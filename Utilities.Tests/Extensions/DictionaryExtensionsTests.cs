@@ -47,5 +47,39 @@ namespace Utilities.Tests.Extensions
             CollectionAssert.AreEqual((ICollection)_dictionary1, (ICollection)_keyValueString1.ConvertKeyValueStringToDictionary());
             CollectionAssert.AreEqual((ICollection)_dictionary1, (ICollection)_keyValueString2.ConvertKeyValueStringToDictionary(",", "=", normalizeKeyFunc, normalizeValueFunc));
         }
+
+        [TestMethod]
+        public void GetOrDefault()
+        {
+            var source = new Dictionary<string, string>
+            {
+                { "1", "A" },
+                { "2", "B" },
+                { "3", "C" },
+                { "4", "D" },
+                { "5", "E" }
+            };
+
+            Assert.AreEqual("A", source.GetOrDefault("1"));
+            Assert.AreEqual("B", source.GetOrDefault("2"));
+            Assert.AreEqual(null, source.GetOrDefault("6"));
+        }
+
+        [TestMethod]
+        public void GetOrAdd()
+        {
+            var source = new Dictionary<string, string>
+            {
+                { "1", "A" },
+                { "2", "B" },
+                { "3", "C" },
+                { "4", "D" },
+                { "5", "E" }
+            };
+
+            Assert.AreEqual("A", source.GetOrAdd("1", _ => "F"));
+            Assert.AreEqual("B", source.GetOrAdd("2", _ => "J"));
+            Assert.AreEqual("H", source.GetOrAdd("6", _ => "H"));
+        }
     }
 }
