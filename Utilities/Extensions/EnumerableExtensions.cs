@@ -57,7 +57,7 @@ namespace Utilities.Extensions
         /// <summary>
         ///  Filters a <see cref="System.Collections.Generic.IEnumerable{T}" /> by given predicate if given condition is true.
         /// </summary>
-        public static IEnumerable<T> WhereIf<T>(this ICollection<T> source, bool condition, Func<T, bool> predicate) where T : class
+        public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> source, bool condition, Func<T, bool> predicate)
         {
             return condition ? source.Where(predicate) : source;
         }
@@ -65,7 +65,7 @@ namespace Utilities.Extensions
         /// <summary>
         ///  Filters a <see cref="System.Collections.Generic.IEnumerable{T}" /> by ifPredicate if given condition is true otherwise by elsePredicate.
         /// </summary>
-        public static IEnumerable<T> WhereIfElse<T>(this ICollection<T> source, bool condition, Func<T, bool> ifPredicate, Func<T, bool> elsePredicate) where T : class
+        public static IEnumerable<T> WhereIfElse<T>(this IEnumerable<T> source, bool condition, Func<T, bool> ifPredicate, Func<T, bool> elsePredicate)
         {
             return source.Where(condition ? ifPredicate : elsePredicate);
         }

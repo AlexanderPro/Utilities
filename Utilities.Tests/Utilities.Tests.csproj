@@ -50,6 +50,7 @@
     <Compile Include="Extensions\ComparableExtensionsTests.cs" />
     <Compile Include="Extensions\DateTimeExtensionsTests.cs" />
     <Compile Include="Extensions\DictionaryExtensionsTests.cs" />
+    <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
     <Compile Include="Extensions\EnumExtensionsTests.cs" />
     <Compile Include="Extensions\StreamExtensionsTests.cs" />
     <Compile Include="Extensions\TrafficLight.cs" />
