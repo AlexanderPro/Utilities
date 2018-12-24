@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Extensions\DictionaryExtensionsTests.cs" />
     <Compile Include="Extensions\EnumExtensionsTests.cs" />
+    <Compile Include="Extensions\StreamExtensionsTests.cs" />
     <Compile Include="Extensions\TrafficLight.cs" />
     <Compile Include="Extensions\ObjectExtensionsTests.cs" />
     <Compile Include="IO\LineReaderTests.cs" />
