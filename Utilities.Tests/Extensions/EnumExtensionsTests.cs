@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Utilities.Extensions;
 
-namespace Utilities.Tests.Common
+namespace Utilities.Tests.Extensions
 {
     [TestClass]
     public class EnumExtensionsTests

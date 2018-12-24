@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 
-namespace Utilities.Tests.Common
+namespace Utilities.Tests.Extensions
 {
     enum TrafficLight
     {

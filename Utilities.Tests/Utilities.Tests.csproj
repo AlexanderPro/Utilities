@@ -45,14 +45,14 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\DictionaryExtensionsTests.cs" />
-    <Compile Include="Common\EnumExtensionsTests.cs" />
-    <Compile Include="Common\TrafficLight.cs" />
-    <Compile Include="Common\ObjectExtensionsTests.cs" />
+    <Compile Include="Extensions\DictionaryExtensionsTests.cs" />
+    <Compile Include="Extensions\EnumExtensionsTests.cs" />
+    <Compile Include="Extensions\TrafficLight.cs" />
+    <Compile Include="Extensions\ObjectExtensionsTests.cs" />
     <Compile Include="IO\LineReaderTests.cs" />
     <Compile Include="Net\SocketTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Common\ByteArrayExtensionsTests.cs" />
+    <Compile Include="Extensions\ByteArrayExtensionsTests.cs" />
     <Compile Include="Security\Cryptography\SymmetricAlgorithmExtensionsTests.cs" />
     <Compile Include="Security\Cryptography\X509CertificatesTests.cs" />
   </ItemGroup>
