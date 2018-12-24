@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Utilities.Tests.Extensions
 {
     enum TrafficLight
     {
-        [Description("Red light.")]
+        [Display(Name = "Red", ShortName = "R", Description = "Red light"), Description("Red light")]
         Red,
-        
-        [Description("Yellow light.")]
+
+        [Display(Name = "Yellow", ShortName = "Y", Description = "Yellow light"), Description("Yellow light")]
         Yellow,
 
-        [Description("Green light.")]
+        [Display(Name = "Green", ShortName = "G", Description = "Green light"), Description("Green light")]
         Green,
 
         Unspecified
