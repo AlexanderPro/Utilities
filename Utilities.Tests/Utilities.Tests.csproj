@@ -55,6 +55,7 @@
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
     <Compile Include="Extensions\EnumExtensionsTests.cs" />
     <Compile Include="Extensions\StreamExtensionsTests.cs" />
+    <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\TrafficLight.cs" />
     <Compile Include="Extensions\ObjectExtensionsTests.cs" />
     <Compile Include="Extensions\XmlExtensionsTests.cs" />
