@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Net;
 using System.Net.Sockets;
 
@@ -16,7 +15,7 @@ namespace Utilities.Net.Sockets
         #region Fields.Private
 
         private TcpListener _listener = null;
-        private SynchronizedCollection<SocketClientBase> _socketClients;
+        private ConcurrentBag<SocketClientBase> _socketClients;
         private Boolean _disposed = false;
 
         #endregion
@@ -37,7 +36,7 @@ namespace Utilities.Net.Sockets
         /// <summary>
         /// Gets the collecton of socket clients
         /// </summary>
-        public override IList<SocketClientBase> SocketClients { get { return _socketClients; } }
+        public override IList<SocketClientBase> SocketClients { get { return _socketClients.ToList(); } }
 
         /// <summary>
         /// Gets the status of the server.
@@ -57,7 +56,7 @@ namespace Utilities.Net.Sockets
         {
             LocalEndPoint = localEndPoint;
             _listener = new TcpListener(localEndPoint);
-            _socketClients = new SynchronizedCollection<SocketClientBase>();
+            _socketClients = new ConcurrentBag<SocketClientBase>();
             ServerStatus = SocketServerStatus.Stop;
         }
 

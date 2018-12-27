@@ -195,7 +195,7 @@ namespace Utilities.Diagnostics
 
         public static Int32 StartProcessAsActiveUser(String fileName, String arguments, String workingDirectory)
         {
-            var identity = System.Security.Principal.WindowsIdentity.GetCurrent();
+            var identity = WindowsIdentity.GetCurrent();
             if (identity.Name != "NT AUTHORITY\\SYSTEM") SetProcessTokenPrivileges(Process.GetCurrentProcess().Handle, "SeTcbPrivilege");
             return CreateUIProcessForServiceRunningAsLocalSystem(fileName, arguments, workingDirectory);
         }

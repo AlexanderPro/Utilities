@@ -5,7 +5,7 @@ namespace Utilities.IO
     /// <summary>
     /// A helper class for File operations.
     /// </summary>
-    public static class FileHelper
+    public static class FileUtils
     {
         /// <summary>
         /// Checks and deletes given file if it does exists.

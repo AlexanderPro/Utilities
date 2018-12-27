@@ -6,7 +6,7 @@ namespace Utilities.IO
     /// <summary>
     /// A helper class for Directory operations.
     /// </summary>
-    public static class DirectoryHelper
+    public static class DirectoryUtils
     {
         /// <summary>
         ///  Copies System.IO.DirectoryInfo's contents to a new path.

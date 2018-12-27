@@ -1,39 +1,31 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{85644733-CA10-4EF1-946E-514D9A59AB6A}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2047
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{64EA2F1E-4BA5-4857-81BB-CAC476B7D38C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities.Tests", "Utilities.Tests\Utilities.Tests.csproj", "{73ECA6EC-B068-4717-8047-055F931AF93F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E76679F6-FD2B-4129-98E2-9D0CAD5E6310}"
-	ProjectSection(SolutionItems) = preProject
-		Local.testsettings = Local.testsettings
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-		Utilities.vsmdi = Utilities.vsmdi
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities.Tests", "Utilities.Tests\Utilities.Tests.csproj", "{272B0156-7B53-4E79-BE5A-2DC59792A127}"
 EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Utilities.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{85644733-CA10-4EF1-946E-514D9A59AB6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{85644733-CA10-4EF1-946E-514D9A59AB6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{85644733-CA10-4EF1-946E-514D9A59AB6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{85644733-CA10-4EF1-946E-514D9A59AB6A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{73ECA6EC-B068-4717-8047-055F931AF93F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{73ECA6EC-B068-4717-8047-055F931AF93F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{73ECA6EC-B068-4717-8047-055F931AF93F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{73ECA6EC-B068-4717-8047-055F931AF93F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64EA2F1E-4BA5-4857-81BB-CAC476B7D38C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64EA2F1E-4BA5-4857-81BB-CAC476B7D38C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64EA2F1E-4BA5-4857-81BB-CAC476B7D38C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64EA2F1E-4BA5-4857-81BB-CAC476B7D38C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{272B0156-7B53-4E79-BE5A-2DC59792A127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{272B0156-7B53-4E79-BE5A-2DC59792A127}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{272B0156-7B53-4E79-BE5A-2DC59792A127}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{272B0156-7B53-4E79-BE5A-2DC59792A127}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {3BAB838A-C203-481B-AA10-4FA30B381397}
 	EndGlobalSection
 EndGlobal

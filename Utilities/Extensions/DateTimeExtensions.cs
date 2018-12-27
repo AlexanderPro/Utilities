@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Utilities.Extensions
 {
@@ -9,7 +7,6 @@ namespace Utilities.Extensions
     /// </summary>
     public static class DateTimeExtensions
     {
-#if NETFX_40 || NETFX_45
         /// <summary>
         /// Returns the number of seconds that have elapsed since 1970-01-01T00:00:00Z.
         /// </summary>
@@ -33,7 +30,7 @@ namespace Utilities.Extensions
             var timeSpan = TimeSpan.FromSeconds(unixTime);
             return epoch.Add(timeSpan).ToLocalTime();
         }
-#endif
+
         /// <summary>
         /// Gets the value of the end of the day (23:59)
         /// </summary>

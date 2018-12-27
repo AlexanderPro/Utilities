@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Utilities.Common
 {
-    public static class DateTimeHelper
+    public static class DateTimeUtils
     {
         /// <summary>
         /// Returns all days of the month.

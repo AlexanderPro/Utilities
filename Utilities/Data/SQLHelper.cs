@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
 using System.Data.Common;
 
-namespace Utilities.SQL
+namespace Utilities.Data
 {
     public class SQLHelper : IDisposable
     {
@@ -48,7 +45,7 @@ namespace Utilities.SQL
 
         public SQLHelper(String connectionString, String providerInvariantName, Boolean handleExceptions)
         {
-            _factory = DbProviderFactories.GetFactory(providerInvariantName);
+            _factory = DataUtils.GetDbProviderFactory(providerInvariantName);
             Connection = _factory.CreateConnection();
             Command = _factory.CreateCommand();
             Connection.ConnectionString = connectionString;
