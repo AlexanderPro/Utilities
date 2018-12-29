@@ -78,7 +78,7 @@ namespace Utilities.Extensions
         /// <summary>
         /// Converts a dictionary to a key-value string
         /// </summary>
-        public static String ConvertDictionaryToKeyValueString<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, String pairDelimiter = ";", String keyValueDelimiter = "=", Func<String, String> normalizeKeyFunc = null, Func<String, String> normalizeValueFunc = null)
+        public static String ToKeyValueString<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, String pairDelimiter = ";", String keyValueDelimiter = "=", Func<String, String> normalizeKeyFunc = null, Func<String, String> normalizeValueFunc = null)
         {
             var pairs = dictionary.
                         Select(kv =>
@@ -93,7 +93,7 @@ namespace Utilities.Extensions
         /// <summary>
         /// Converts a key-value string to a dictionary
         /// </summary>
-        public static IDictionary<String, String> ConvertKeyValueStringToDictionary(this String value, String pairDelimiter = ";", String keyValueDelimiter = "=", Func<String, String> normalizeKeyFunc = null, Func<String, String> normalizeValueFunc = null)
+        public static IDictionary<String, String> ToDictionary(this String value, String pairDelimiter = ";", String keyValueDelimiter = "=", Func<String, String> normalizeKeyFunc = null, Func<String, String> normalizeValueFunc = null)
         {
             var dictionary = new Dictionary<String, String>();
             if (String.IsNullOrEmpty(value)) return dictionary;

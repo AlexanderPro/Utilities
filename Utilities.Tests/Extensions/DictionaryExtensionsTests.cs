@@ -32,8 +32,8 @@ namespace Utilities.Tests.Extensions
             Func<String, String> normalizeKeyFunc = s => s.Replace("10", "TEN");
             Func<String, String> normalizeValueFunc = s => s.ToUpper();
 
-            Assert.AreEqual(_keyValueString1, _dictionary1.ConvertDictionaryToKeyValueString());
-            Assert.AreEqual(_keyValueString2, _dictionary1.ConvertDictionaryToKeyValueString(",", "=", normalizeKeyFunc, normalizeValueFunc));
+            Assert.AreEqual(_keyValueString1, _dictionary1.ToKeyValueString());
+            Assert.AreEqual(_keyValueString2, _dictionary1.ToKeyValueString(",", "=", normalizeKeyFunc, normalizeValueFunc));
         }
 
         [TestMethod]
@@ -42,8 +42,8 @@ namespace Utilities.Tests.Extensions
             Func<String, String> normalizeKeyFunc = s => s.Replace("TEN", "10");
             Func<String, String> normalizeValueFunc = s => new CultureInfo("en").TextInfo.ToTitleCase(s.ToLower());
 
-            CollectionAssert.AreEqual((ICollection)_dictionary1, (ICollection)_keyValueString1.ConvertKeyValueStringToDictionary());
-            CollectionAssert.AreEqual((ICollection)_dictionary1, (ICollection)_keyValueString2.ConvertKeyValueStringToDictionary(",", "=", normalizeKeyFunc, normalizeValueFunc));
+            CollectionAssert.AreEqual((ICollection)_dictionary1, (ICollection)_keyValueString1.ToDictionary());
+            CollectionAssert.AreEqual((ICollection)_dictionary1, (ICollection)_keyValueString2.ToDictionary(",", "=", normalizeKeyFunc, normalizeValueFunc));
         }
 
         [TestMethod]
