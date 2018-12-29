@@ -2,11 +2,21 @@
 <package>
   <metadata>
     <id>Pro.NET.Utilities</id>
-    <version>$version$</version>
+    <version>1.2.3</version>
     <title>.NET Utilities</title>
     <authors>Alexander Illarionov</authors>
-    <projectUrl>http://github.com/AlexanderPro/Utilities</projectUrl>
+    <owners>Alexander Illarionov</owners>
+    <projectUrl>https://github.com/AlexanderPro/Utilities</projectUrl>
+    <repository type="GIT" url="https://github.com/AlexanderPro/Utilities" />
     <description>This .net library contains many useful methods, extensions, helper classes, etc.</description>
-    <copyright>Copyright 2014</copyright>
+    <copyright>Copyright 2018</copyright>
+    <language>en-US</language>
+    <tags>.NET Utilities</tags>
+    <dependencies>
+        <group targetFramework=".NETStandard2.0">
+            <dependency id="System.ComponentModel.Annotations" version="4.4.0" />
+            <dependency id="System.Security.Principal.Windows" version="4.5.1" />
+        </group>
+    </dependencies>
   </metadata>
 </package>
