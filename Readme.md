@@ -1,2 +1,2 @@
 # Utilities
-### This .net library contains many useful methods, extensions, helper classes, etc.
+This .net library contains many useful methods, extensions, helper classes, etc.
