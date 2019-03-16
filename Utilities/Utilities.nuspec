@@ -2,14 +2,14 @@
 <package>
   <metadata>
     <id>Pro.NET.Utilities</id>
-    <version>1.2.3</version>
+    <version>1.2.4</version>
     <title>.NET Utilities</title>
     <authors>Alexander Illarionov</authors>
     <owners>Alexander Illarionov</owners>
     <projectUrl>https://github.com/AlexanderPro/Utilities</projectUrl>
     <repository type="GIT" url="https://github.com/AlexanderPro/Utilities" />
     <description>This .net library contains many useful methods, extensions, helper classes, etc.</description>
-    <copyright>Copyright 2018</copyright>
+    <copyright>Copyright 2019</copyright>
     <language>en-US</language>
     <tags>.NET Utilities</tags>
     <dependencies>
