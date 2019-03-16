@@ -9,41 +9,32 @@ namespace Utilities.Diagnostics
 {
     public static class ProcessManager
     {
-        private static Int32 CreateUIProcessForServiceRunningAsLocalSystem(String fileName, String arguments, String workingDirectory)
+        private static int StartProcessAsCurrentUser(string fileName, string arguments, string workingDirectory)
         {
-            var pi = new PROCESS_INFORMATION();
-            var sa = new SECURITY_ATTRIBUTES();
-            var si = new STARTUPINFO();
-            var profileInfo = new PROFILEINFO();
-            var userToken = new IntPtr(0);
-            var primaryToken = new IntPtr(0);
-            var activeUserSessionId = (UInt32)0xFFFFFFFF;
-            var activeUserName = "";
-            var processID = -1;
-            var ptrBuffer = IntPtr.Zero;
-            var nBytes = (UInt32)0;
-            var message = "";
-            var methodName = "";
-            var error = 0;
+            var procInfo = new PROCESS_INFORMATION();
+            var userToken = IntPtr.Zero;
+            var primaryToken = IntPtr.Zero;
+            var ptrEnvironment = IntPtr.Zero;
 
             try
             {
-                methodName = MethodInfo.GetCurrentMethod().Name;
-                activeUserSessionId = ProcessNativeMethods.WTSGetActiveConsoleSessionId();
+                var activeUserSessionId = ProcessNativeMethods.WTSGetActiveConsoleSessionId();
                 if (activeUserSessionId == 0xFFFFFFFF)
                 {
-                    error = Marshal.GetLastWin32Error();
-                    message = String.Format("ProcessManager -> {0} -> The call to WTSGetActiveConsoleSessionId failed, GetLastError returns: {1}", methodName, error);
+                    var error = Marshal.GetLastWin32Error();
+                    var message = string.Format("StartProcessAsCurrentUser: WTSGetActiveConsoleSessionId failed, Error: {0}", error);
                     throw new Win32Exception(error, message);
                 }
 
-                if (!ProcessNativeMethods.WTSQuerySessionInformation(IntPtr.Zero, (Int32)activeUserSessionId, WTS_INFO_CLASS.WTSUserName, out ptrBuffer, out nBytes))
+                var buffer = IntPtr.Zero;
+                var bytesReturned = (UInt32)0;
+                if (!ProcessNativeMethods.WTSQuerySessionInformation(IntPtr.Zero, (int)activeUserSessionId, WTS_INFO_CLASS.WTSUserName, out buffer, out bytesReturned))
                 {
-                    error = Marshal.GetLastWin32Error();
+                    var error = Marshal.GetLastWin32Error();
                     //On earlier operating systems from Vista, when no one is logged in, you get RPC_S_INVALID_BINDING which is ok, we just won't impersonate
                     if (error != ProcessNativeConstants.RPC_S_INVALID_BINDING)
                     {
-                        message = String.Format("ProcessManager -> {0} -> The call to WTSQuerySessionInformation failed, GetLastError returns: {1}", methodName, error);
+                        var message = string.Format("StartProcessAsCurrentUser: WTSQuerySessionInformation failed, Error: {0}", error);
                         throw new Win32Exception(error, message);
                     }
 
@@ -51,140 +42,137 @@ namespace Utilities.Diagnostics
                     return StartProcess(fileName, arguments, workingDirectory);
                 }
 
-                activeUserName = Marshal.PtrToStringAnsi(ptrBuffer);
-                ProcessNativeMethods.WTSFreeMemory(ptrBuffer);
+                var activeUserName = Marshal.PtrToStringAnsi(buffer);
+                ProcessNativeMethods.WTSFreeMemory(buffer);
 
                 //We are supposedly running as a service so we're going to be running in session 0 so get a user token from the active user session
-                if (!ProcessNativeMethods.WTSQueryUserToken((uint)activeUserSessionId, out userToken))
+                if (!ProcessNativeMethods.WTSQueryUserToken(activeUserSessionId, out userToken))
                 {
-                    //Int32 lastError = Marshal.GetLastWin32Error();
-                    //Remember, sometimes nobody is logged in (especially when we're set to Automatically startup) you should get error code 1008 (no user token available)
-                    //if (ERROR_NO_TOKEN != lastError)
-                    //{
-                    //   //Ensure we're running under the local system account
-                    //   WindowsIdentity identity = System.Security.Principal.WindowsIdentity.GetCurrent();
-
-                    //   if ("NT AUTHORITY\\SYSTEM" != identity.Name)
-                    //   {
-                    //      message = String.Format("ProcessManager -> {0} -> The call to WTSQueryUserToken failed and querying the process' account identity results in an identity which does not match 'NT AUTHORITY\\SYSTEM' but instead returns the name: {1} GetLastError returns: {2}", MethodInfo.GetCurrentMethod().Name, identity.Name, lastError);
-                    //      throw new Exception(message);
-                    //   }
-
-                    error = Marshal.GetLastWin32Error();
-                    message = String.Format("ProcessManager -> {0} -> The call to WTSQueryUserToken failed, GetLastError returns: {1}", methodName, error);
+                    var error = Marshal.GetLastWin32Error();
+                    var message = string.Format("StartProcessAsCurrentUser: WTSQueryUserToken failed, Error: {0}", error);
                     throw new Win32Exception(error, message);
-                    //}
-
-                    //No one logged in so let's just do this the simple way
-                    //return SimpleProcessStart(fileName, arguments, workingDirectory);
                 }
 
+                // Convert the impersonation token to a primary token
                 if (!ProcessNativeMethods.DuplicateTokenEx(userToken, TokenAccess.TOKEN_ASSIGN_PRIMARY | TokenAccess.TOKEN_ALL_ACCESS, IntPtr.Zero, SECURITY_IMPERSONATION_LEVEL.SecurityImpersonation, TOKEN_TYPE.TokenPrimary, out primaryToken))
                 {
-                    error = Marshal.GetLastWin32Error();
-                    message = String.Format("ProcessManager -> {0} -> The call to DuplicateTokenEx failed, GetLastError returns: {1}", methodName, error);
+                    var error = Marshal.GetLastWin32Error();
+                    var message = string.Format("StartProcessAsCurrentUser: DuplicateTokenEx failed, Error: {0}", error);
                     throw new Win32Exception(error, message);
                 }
 
                 //Create an appropriate environment block for this user token (if we have one)
-                IntPtr ptrEnvironment = IntPtr.Zero;
                 if (!ProcessNativeMethods.CreateEnvironmentBlock(out ptrEnvironment, primaryToken, false))
                 {
-                    error = Marshal.GetLastWin32Error();
-                    message = String.Format("ProcessManager -> {0} -> The call to CreateEnvironmentBlock failed, GetLastError returns: {1}", methodName, error);
+                    var error = Marshal.GetLastWin32Error();
+                    var message = string.Format("StartProcessAsCurrentUser: CreateEnvironmentBlock failed, Error: {0}", error);
                     throw new Win32Exception(error, message);
                 }
 
-                sa.Length = Marshal.SizeOf(sa);
-                si.cb = Marshal.SizeOf(si);
-
-                //DO NOT set this to "winsta0\\default" (even though many online resources say to do so)
-                //si.lpDesktop = String.Empty;
+                var profileInfo = new PROFILEINFO();
                 profileInfo.dwSize = Marshal.SizeOf(profileInfo);
                 profileInfo.lpUserName = activeUserName;
-
 
                 //Remember, sometimes nobody is logged in (especially when we're set to Automatically startup)
                 if (!ProcessNativeMethods.LoadUserProfile(primaryToken, ref profileInfo))
                 {
-                    error = Marshal.GetLastWin32Error();
-                    message = String.Format("ProcessManager -> {0} -> The call to LoadUserProfile failed, GetLastError returns: {1}", methodName, error);
+                    var error = Marshal.GetLastWin32Error();
+                    var message = string.Format("StartProcessAsCurrentUser: LoadUserProfile failed, Error: {0}", error);
                     throw new Win32Exception(error, message);
                 }
 
-                String commandLine = "\"" + fileName + "\"";
-                commandLine = (!String.IsNullOrEmpty(arguments)) ? (commandLine + " " + arguments) : commandLine;
-                if (!ProcessNativeMethods.CreateProcessAsUser(primaryToken, null, commandLine, ref sa, ref sa, false, CreationFlags.CREATE_NO_WINDOW | CreationFlags.NORMAL_PRIORITY_CLASS | CreationFlags.CREATE_UNICODE_ENVIRONMENT, ptrEnvironment, workingDirectory, ref si, ref pi))
+                var startInfo = new STARTUPINFO();
+                startInfo.cb = Marshal.SizeOf(startInfo);
+                //DO NOT set this to "winsta0\\default" (even though many online resources say to do so)
+                //startInfo.lpDesktop = string.Empty;
+
+                var commandLine = "\"" + fileName + "\"";
+                commandLine = !string.IsNullOrEmpty(arguments) ? (commandLine + " " + arguments) : commandLine;
+                if (!ProcessNativeMethods.CreateProcessAsUser(primaryToken, null, commandLine, IntPtr.Zero, IntPtr.Zero, false, CreationFlags.CREATE_NO_WINDOW | CreationFlags.NORMAL_PRIORITY_CLASS | CreationFlags.CREATE_UNICODE_ENVIRONMENT, ptrEnvironment, workingDirectory, ref startInfo, ref procInfo))
                 {
-                    error = Marshal.GetLastWin32Error();
-                    message = String.Format("ProcessManager -> {0} -> The call to CreateProcessAsUser failed, GetLastError returns: {1}", methodName, error);
+                    var error = Marshal.GetLastWin32Error();
+                    var message = string.Format("StartProcessAsCurrentUser: CreateProcessAsUser failed, Error: {0}", error);
                     throw new Win32Exception(error, message);
                 }
 
-                //if (!ProcessNativeMethods.CreateProcessWithTokenW(primaryToken, LogonFlags.LOGON_WITH_PROFILE, null, commandLine, CreationFlags.CREATE_NO_WINDOW | CreationFlags.NORMAL_PRIORITY_CLASS | CreationFlags.CREATE_UNICODE_ENVIRONMENT, ptrEnvironment, workingDirectory, ref si, ref pi))
-                //{
-                //   error = Marshal.GetLastWin32Error();
-                //   message = String.Format("ProcessManager -> {0} -> The call to CreateProcessWithTokenW failed, GetLastError returns: {1}", methodName, error);
-                //   throw new Win32Exception(error, message);
-                //}
-
-                processID = pi.dwProcessID;
+                return procInfo.dwProcessID;
             }
             finally
             {
-                if (pi.hProcess != IntPtr.Zero) ProcessNativeMethods.CloseHandle(pi.hProcess);
-                if (pi.hThread != IntPtr.Zero) ProcessNativeMethods.CloseHandle(pi.hThread);
-            }
+                if (userToken != IntPtr.Zero)
+                {
+                    ProcessNativeMethods.CloseHandle(userToken);
+                }
 
-            return processID;
+                if (primaryToken != IntPtr.Zero)
+                {
+                    ProcessNativeMethods.CloseHandle(primaryToken);
+                }
+
+                if (ptrEnvironment != IntPtr.Zero)
+                {
+                    ProcessNativeMethods.DestroyEnvironmentBlock(ptrEnvironment);
+                }
+
+                if (procInfo.hProcess != IntPtr.Zero)
+                {
+                    ProcessNativeMethods.CloseHandle(procInfo.hProcess);
+                }
+
+                if (procInfo.hThread != IntPtr.Zero)
+                {
+                    ProcessNativeMethods.CloseHandle(procInfo.hThread);
+                }
+            }
         }
 
-        public static void SetProcessTokenPrivileges(Int32 processId, String tokenPrivilege)
+        public static void SetProcessTokenPrivileges(int processId, string tokenPrivilege)
         {
             var process = Process.GetProcessById(processId);
             SetProcessTokenPrivileges(process.Handle, tokenPrivilege);
         }
 
-        public static void SetProcessTokenPrivileges(IntPtr processHandle, String tokenPrivilege)
+        public static void SetProcessTokenPrivileges(IntPtr processHandle, string tokenPrivilege)
         {
             var hToken = IntPtr.Zero;
             try
             {
-                var methodName = MethodInfo.GetCurrentMethod().Name;
                 if (!ProcessNativeMethods.OpenProcessToken(processHandle, TokenAccess.TOKEN_ADJUST_PRIVILEGES | TokenAccess.TOKEN_QUERY, out hToken))
                 {
                     var error = Marshal.GetLastWin32Error();
-                    var message = String.Format("ProcessManager -> {0} -> The call to OpenProcessToken failed, GetLastError returns: {1}", methodName, error);
+                    var message = string.Format("SetProcessTokenPrivileges: OpenProcessToken failed, Error: {0}", error);
                     throw new Win32Exception(error, message);
                 }
 
                 LUID restoreLUID;
                 TOKEN_PRIVILEGES tokenPrivileges;
-                if (!ProcessNativeMethods.LookupPrivilegeValue(String.Empty, tokenPrivilege, out restoreLUID))
+                if (!ProcessNativeMethods.LookupPrivilegeValue(string.Empty, tokenPrivilege, out restoreLUID))
                 {
                     var error = Marshal.GetLastWin32Error();
-                    var message = String.Format("ProcessManager -> {0} -> The call to LookupPrivilegeValue failed, GetLastError returns: {1}", methodName, error);
+                    var message = string.Format("SetProcessTokenPrivileges: LookupPrivilegeValue failed, Error: {0}", error);
                     throw new Win32Exception(error, message);
                 }
 
                 tokenPrivileges.m_nPrivilegeCount = 1;
                 tokenPrivileges.m_oLUID = restoreLUID;
                 tokenPrivileges.m_nAttributes = ProcessNativeConstants.SE_PRIVILEGE_ENABLED;
-
                 if (!ProcessNativeMethods.AdjustTokenPrivileges(hToken, false, ref tokenPrivileges, 0, IntPtr.Zero, IntPtr.Zero))
                 {
                     var error = Marshal.GetLastWin32Error();
-                    var message = String.Format("ProcessManager -> {0} -> The call to AdjustTokenPrivileges failed, GetLastError returns: {1}", methodName, error);
+                    var message = string.Format("SetProcessTokenPrivileges: AdjustTokenPrivileges failed, Error: {0}", error);
                     throw new Win32Exception(error, message);
                 }
             }
             finally
             {
-                if (hToken != IntPtr.Zero) ProcessNativeMethods.CloseHandle(hToken);
+                if (hToken != IntPtr.Zero)
+                {
+                    ProcessNativeMethods.CloseHandle(hToken);
+                }
             }
         }
 
-        public static Int32 StartProcess(String fileName, String arguments, String workingDirectory)
+        public static int StartProcess(string fileName, string arguments, string workingDirectory)
         {
             var process = new Process();
             process.StartInfo.FileName = fileName;
@@ -193,33 +181,36 @@ namespace Utilities.Diagnostics
             return process.Start() ? process.Id : -1;
         }
 
-        public static Int32 StartProcessAsActiveUser(String fileName, String arguments, String workingDirectory)
+        public static int SetPrivilegesAndStartProcessAsCurrentUser(string fileName, string arguments, string workingDirectory)
         {
             var identity = WindowsIdentity.GetCurrent();
-            if (identity.Name != "NT AUTHORITY\\SYSTEM") SetProcessTokenPrivileges(Process.GetCurrentProcess().Handle, "SeTcbPrivilege");
-            return CreateUIProcessForServiceRunningAsLocalSystem(fileName, arguments, workingDirectory);
+            if (identity.Name != "NT AUTHORITY\\SYSTEM")
+            {
+                SetProcessTokenPrivileges(Process.GetCurrentProcess().Handle, "SeTcbPrivilege");
+            }
+            return StartProcessAsCurrentUser(fileName, arguments, workingDirectory);
         }
 
-        public static void CloseAllWindowsOfProcess(Int32 processId)
+        public static void CloseAllWindowsOfProcess(int processId)
         {
             EnumWindowsCallbackDelegate d = delegate(IntPtr hWnd, UInt32 lParam)
             {
                 UInt32 pid;
                 ProcessNativeMethods.GetWindowThreadProcessId(hWnd, out pid);
-                if ((Int32)pid == processId) ProcessNativeMethods.PostMessage(hWnd, ProcessNativeConstants.WM_CLOSE, 0, 0);
+                if ((int)pid == processId) ProcessNativeMethods.PostMessage(hWnd, ProcessNativeConstants.WM_CLOSE, 0, 0);
                 return true;
             };
 
             ProcessNativeMethods.EnumWindows(d, 0);
         }
 
-        public static void KillProcess(Int32 processId)
+        public static void KillProcess(int processId)
         {
             var process = Process.GetProcessById(processId);
             process.Kill();
         }
 
-        public static void KillProcessSafely(Int32 processId, Int32 waitTimeout)
+        public static void KillProcessSafely(int processId, int waitTimeout)
         {
             var process = Process.GetProcessById(processId);
             CloseAllWindowsOfProcess(process.Id);

@@ -20,6 +20,10 @@ namespace Utilities.Diagnostics
         [DllImport("userenv.dll", EntryPoint = "CreateEnvironmentBlock", SetLastError = true)]
         public static extern Boolean CreateEnvironmentBlock(out IntPtr environmentBlock, IntPtr tokenHandle, Boolean inheritProcessEnvironment);
 
+        [DllImport("userenv.dll", EntryPoint = "DestroyEnvironmentBlock", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool DestroyEnvironmentBlock(IntPtr lpEnvironment);
+
         [DllImport("kernel32.dll", EntryPoint = "CloseHandle", SetLastError = true)]
         public static extern Boolean CloseHandle(IntPtr handle);
 
@@ -39,7 +43,7 @@ namespace Utilities.Diagnostics
         public static extern Boolean LoadUserProfile(IntPtr tokenHandle, ref PROFILEINFO profileInfo);
 
         [DllImport("advapi32.dll", EntryPoint = "CreateProcessAsUser", SetLastError = true, CharSet = CharSet.Auto)]
-        public static extern Boolean CreateProcessAsUser(IntPtr userTokenHandle, String applicationName, String commandLine, ref SECURITY_ATTRIBUTES processAttributes, ref SECURITY_ATTRIBUTES threadAttributes, Boolean inheritHandles, CreationFlags in_eCreationFlags, IntPtr environmentBlock, String currentDirectory, ref STARTUPINFO startupInfo, ref PROCESS_INFORMATION processInformation);
+        public static extern Boolean CreateProcessAsUser(IntPtr userTokenHandle, String applicationName, String commandLine, IntPtr lpProcessAttributes, IntPtr lpThreadAttributes, Boolean inheritHandles, CreationFlags in_eCreationFlags, IntPtr environmentBlock, String currentDirectory, ref STARTUPINFO startupInfo, ref PROCESS_INFORMATION processInformation);
 
         [DllImport("advapi32.dll", EntryPoint = "CreateProcessWithTokenW", SetLastError = true, CharSet = CharSet.Auto)]
         public static extern Boolean CreateProcessWithTokenW(IntPtr userTokenHandle, LogonFlags logonFlags, String applicationName, String commandLine, CreationFlags creationFlags, IntPtr environmentBlock, String currentDirectory, ref STARTUPINFO startupInfo, ref PROCESS_INFORMATION processInformation);
