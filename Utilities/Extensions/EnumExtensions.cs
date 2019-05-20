@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -56,6 +57,33 @@ namespace Utilities.Extensions
             var attribute = GetSingleAttributeOrNull<DisplayAttribute>(value);
             var name = attribute == null ? String.Empty : attribute.Description;
             return name;
+        }
+
+        /// <summary>
+        /// Gets items of enum value.
+        /// </summary>
+        public static IEnumerable<Enum> AsEnumerable(this Enum source, bool checkFlag = true)
+        {
+            var result = Enum.GetValues(source.GetType()).Cast<Enum>().WhereIf(checkFlag, source.HasFlag);
+            return result;
+        }
+
+        /// <summary>
+        /// Gets items of enum value.
+        /// </summary>
+        public static IEnumerable<TEnum> AsEnumerable<TEnum>(this Enum source, bool checkFlag = true) where TEnum : IComparable, IConvertible, IFormattable
+        {
+            var result = AsEnumerable(source, checkFlag).Cast<TEnum>();
+            return result;
+        }
+
+        /// <summary>
+        /// Gets items of enum.
+        /// </summary>
+        public static IEnumerable<TEnum> AsEnumerable<TEnum>() where TEnum : IComparable, IConvertible, IFormattable
+        {
+            var result = Enum.GetValues(typeof(TEnum)).Cast<TEnum>();
+            return result;
         }
 
         /// <summary>
